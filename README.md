@@ -1,112 +1,108 @@
-# React Project
+# BYTO - Authentication System
 
-    <H1>AssignMents By BYTQ Company</H1>
-This is a modern React application built with Vite, featuring a beautiful UI using Tailwind CSS and enhanced animations with Framer Motion.
+A modern, responsive authentication system built with React, featuring beautiful UI animations and a seamless user experience.
 
-## 🚀 Features
+## Features
 
-- React 19 with Vite for fast development
-- Tailwind CSS for styling
-- Framer Motion for smooth animations
-- React Router for navigation
-- Lucide React and React Icons for icons
-- ESLint for code quality
+- 🎨 Modern and responsive design
+- ✨ Smooth animations using Framer Motion
+- 🔐 Secure authentication system
+- 📱 Mobile-first approach
+- 🎯 Form validation
+- 🔄 Password reset functionality
+- 📧 Email verification with OTP
+- 🔑 Social login options (Google & Facebook)
+- 🎭 Beautiful UI with gradient backgrounds and animations
 
-## 📋 Prerequisites
+## Tech Stack
 
-Before you begin, ensure you have the following installed:
+- React
+- React Router DOM
+- Framer Motion
+- Tailwind CSS
+- Lucide Icons
 
-- Node.js (Latest LTS version recommended)
-- npm or bun package manager
+## Getting Started
 
-## 🛠️ Installation
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
 
 1. Clone the repository:
-
 ```bash
 git clone <repository-url>
+```
+
+2. Navigate to the project directory:
+```bash
 cd assign
 ```
 
-2. Install dependencies:
-
+3. Install dependencies:
 ```bash
 npm install
-# or if using bun
-bun install
-```
-
-## 🏃‍♂️ Running the Project
-
-### Development Mode
-
-To start the development server:
-
-```bash
-npm run dev
 # or
-bun run dev
+yarn install
 ```
 
-This will start the development server at `http://localhost:5173`
-
-### Build for Production
-
-To create a production build:
-
+4. Start the development server:
 ```bash
-npm run build
+npm start
 # or
-bun run build
+yarn start
 ```
 
-### Preview Production Build
+The application will be available at `http://localhost:3000`
 
-To preview the production build locally:
-
-```bash
-npm run preview
-# or
-bun run preview
-```
-
-### Linting
-
-To run ESLint and check for code quality issues:
-
-```bash
-npm run lint
-# or
-bun run lint
-```
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-assign/
-├── src/              # Source files
-├── public/           # Static assets
-├── node_modules/     # Dependencies
-├── index.html        # Entry HTML file
-├── vite.config.js    # Vite configuration
-├── eslint.config.js  # ESLint configuration
-└── package.json      # Project metadata and dependencies
+src/
+├── components/
+│   └── Auth/
+│       ├── SignIn/
+│       ├── SignUp/
+│       └── Overlay/
+├── pages/
+│   └── Auth/
+└── ...
 ```
 
-## 🛠️ Technologies Used
+## Features in Detail
 
-- [React](https://reactjs.org/) - UI Library
-- [Vite](https://vitejs.dev/) - Build Tool
-- [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
-- [Framer Motion](https://www.framer.com/motion/) - Animation Library
-- [React Router](https://reactrouter.com/) - Routing
-- [ESLint](https://eslint.org/) - Code Linting
-- [Lucid-React]-React-Icons
+### Authentication Pages
+- **Sign In**: Email/phone and password authentication
+- **Sign Up**: New user registration with email verification
+- **Password Reset**: Secure password reset flow with email verification
+- **OTP Verification**: 6-digit OTP verification system
 
-## 📝 License
+### UI/UX Features
+- Responsive design for all screen sizes
+- Beautiful gradient backgrounds
+- Smooth page transitions
+- Interactive form elements
+- Loading states and animations
+- Error handling and validation
+- Social login integration
 
-This project is private and not licensed for public use.
+## Contributing
 
-## 👥 Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This is a private project. Please contact the repository owner for contribution guidelines.
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [React](https://reactjs.org/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)

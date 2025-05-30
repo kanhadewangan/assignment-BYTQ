@@ -169,6 +169,7 @@ const SignInPage = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border-2 border-orange-200 focus:border-orange-400 focus:outline-none transition-colors text-sm md:text-base"
+                                autoComplete="current-password"
                             />
                         </motion.div>
 
