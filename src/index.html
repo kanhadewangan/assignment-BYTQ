@@ -1,0 +1,952 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up - BYTO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <style>
+        /* CSS Variables reflecting BYTO Theme */
+        :root {
+            --byto-primary: #ff914d;
+            --byto-primary-light: #ffa46f;
+            --byto-primary-dark: #e67e3c;
+            --byto-secondary-accent: #ea9ab2; /* Optional accent */
+            --byto-background-start: #fffaf5;
+            --byto-background-end: #FFF1D5;
+            --byto-card-background: #ffffff;
+            --byto-text-primary: #333333;
+            --byto-text-secondary: #555555;
+            --byto-text-placeholder: #999999;
+            --byto-text-on-primary: #ffffff;
+            --byto-border-light: #f0f0f0;
+            --byto-border-medium: #e0e0e0;
+            --byto-border-dark: #cccccc;
+            --byto-error: #dc3545;
+            --byto-success: #28a745;
+
+            /* Component Specific */
+            --byto-font-family: 'Poppins', sans-serif;
+            --byto-focus-shadow-color: rgba(255, 145, 77, 0.25);
+            --byto-card-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            --byto-button-shadow: 0 4px 10px rgba(255, 145, 77, 0.2); 
+            --byto-button-hover-shadow: 0 6px 13px rgba(255, 145, 77, 0.3);
+            --byto-border-radius: 8px;
+            --byto-border-radius-large: 12px;
+            --transition-speed: 0.2s;
+            --easing-function: ease-in-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--byto-background-start), var(--byto-background-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: var(--byto-font-family);
+            min-height: 100vh;
+            padding: 1rem; 
+            position: relative;
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--byto-text-primary);
+            font-size: 2rem;
+        }
+
+        p { 
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            margin: 20px 0 30px;
+        }
+        .overlay p {
+             color: var(--byto-text-on-primary);
+        }
+
+
+        span { 
+            font-size: 12px;
+            color: var(--byto-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        a { 
+            color: var(--byto-primary);
+            font-size: 13px;
+            text-decoration: none;
+            margin: 10px 0;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+        a:hover {
+            color: var(--byto-primary-dark);
+            text-decoration: underline;
+        }
+
+        button { 
+            border-radius: var(--byto-border-radius);
+            border: 1px solid var(--byto-primary-dark); 
+            background: linear-gradient(135deg, var(--byto-primary-light), var(--byto-primary)); 
+            color: var(--byto-text-on-primary);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 12px 45px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in, box-shadow var(--transition-speed) var(--easing-function), background var(--transition-speed);
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: var(--byto-button-shadow);
+        }
+        button:hover {
+            background: linear-gradient(135deg, var(--byto-primary), var(--byto-primary-dark)); 
+            box-shadow: var(--byto-button-hover-shadow);
+            transform: scale(1.02); 
+        }
+        button:active {
+            transform: scale(0.98); 
+             box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        button:focus-visible { 
+            outline: 2px solid var(--byto-primary-dark);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px var(--byto-focus-shadow-color), var(--byto-button-shadow);
+        }
+
+        button.ghost { 
+            background-color: transparent;
+            border-color: var(--byto-text-on-primary);
+            color: var(--byto-text-on-primary);
+            box-shadow: none;
+        }
+         button.ghost:hover {
+             background-color: rgba(255, 255, 255, 0.1); 
+             box-shadow: none;
+             transform: scale(1.02);
+         }
+         button.ghost:active {
+             transform: scale(0.98);
+             background-color: rgba(255, 255, 255, 0.15);
+         }
+         button.ghost:focus-visible {
+             outline: 2px solid var(--byto-text-on-primary);
+             outline-offset: 2px;
+             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+         }
+
+
+        form { 
+            background-color: var(--byto-card-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px; 
+            height: 100%;
+            text-align: center;
+            width: 100%;
+        }
+
+        input {
+            background-color: #fff; 
+            border: 1px solid var(--byto-primary); 
+            border-radius: var(--byto-border-radius);
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+            font-family: var(--byto-font-family);
+            font-size: 14px;
+            color: var(--byto-text-primary);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed);
+        }
+        input::placeholder {
+             color: var(--byto-text-placeholder);
+        }
+        input:focus,
+        input:focus-visible { 
+            outline: none;
+            border-color: var(--byto-primary); 
+            box-shadow: 0 0 0 3px var(--byto-focus-shadow-color);
+            background-color: var(--byto-card-background); 
+        }
+
+
+        .container {
+            background-color: var(--byto-card-background);
+            border-radius: var(--byto-border-radius-large);
+            box-shadow: var(--byto-card-shadow);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 520px;
+            z-index: 10;
+        }
+
+        .form-container { 
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-container h1 { 
+             margin-bottom: 1rem;
+        }
+        .form-container form { 
+            padding: 0 40px;
+            background-color: transparent;
+        }
+
+
+        .sign-in-container {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+            justify-content: center; 
+        }
+
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .sign-up-container {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+            justify-content: center; 
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        @keyframes show {
+            0%, 49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+            
+            50%, 100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .container.right-panel-active .overlay-container{
+            transform: translateX(-100%);
+        }
+
+        .overlay {
+            background: var(--byto-primary);
+            background: -webkit-linear-gradient(to right, var(--byto-primary-dark), var(--byto-primary));
+            background: linear-gradient(to right, var(--byto-primary-dark), var(--byto-primary));
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0 0;
+            color: var(--byto-text-on-primary);
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+        }
+         .overlay h1 {
+             color: var(--byto-text-on-primary);
+         }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-left {
+            transform: translateX(-20%);
+        }
+
+        .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+
+        .social-container {
+            margin: 15px 0;
+        }
+
+        .social-container a {
+            border: 1px solid var(--byto-border-medium);
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            height: 40px;
+            width: 40px;
+            color: var(--byto-primary);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .social-container a:hover {
+            background-color: var(--byto-primary);
+            color: var(--byto-text-on-primary);
+            border-color: var(--byto-primary);
+        }
+        /* Style for Facebook icon if needed, e.g., specific color */
+        .social-container a.facebook i {
+            /* color: #1877F2; /* Official Facebook blue, or use --byto-primary for consistency */
+        }
+        .social-container a.facebook:hover {
+            /* background-color: #1877F2; */
+            /* border-color: #1877F2; */
+        }
+
+
+        .lottie-animation-container {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* General Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: var(--byto-card-background);
+            margin: auto;
+            padding: 25px 30px;
+            border: none;
+            border-radius: var(--byto-border-radius-large);
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            text-align: center;
+            animation: modalOpen 0.3s ease-out;
+        }
+
+        @keyframes modalOpen {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-content h2 {
+            color: var(--byto-text-primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .modal-content p {
+            color: var(--byto-text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-content input[type="email"],
+        .modal-content input[type="text"],
+        .modal-content input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--byto-border-light); 
+            border-radius: var(--byto-border-radius);
+            font-family: var(--byto-font-family);
+            font-size: 14px;
+        }
+        .modal-content input:focus-visible { 
+            border-color: var(--byto-primary);
+            box-shadow: 0 0 0 3px var(--byto-focus-shadow-color);
+            outline: none;
+            background-color: var(--byto-card-background);
+        }
+
+        .modal-content button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+        }
+
+        .close-button {
+            color: var(--byto-text-placeholder);
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--byto-text-primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* sr-only class for accessibility */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+
+        /* --- Mobile Styles --- */
+        @media (max-width: 767px) {
+            body {
+                padding: 0; 
+            }
+            .container {
+                min-height: 100vh; 
+                height: 100%;
+                width:100%;
+                border-radius:0;
+                box-shadow:none;
+                background-color: transparent; 
+            }
+
+            .form-container { 
+                position: absolute; 
+                width: 100%;    
+                height: 100%;   
+                left: 0;        
+                top: 0;         
+                padding: 20px 20px 20px 20px; 
+                transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out; 
+                visibility: hidden; 
+                background-color: var(--byto-card-background); 
+                justify-content: flex-start; 
+                overflow-y: auto; 
+            }
+            .form-container form { 
+                padding: 0; 
+                max-width: 360px; 
+                width: 100%; 
+            }
+
+            .sign-in-container {
+                z-index: 2;
+                opacity: 1; 
+                visibility: visible; 
+                transform: none !important; 
+            }
+
+            .sign-up-container {
+                z-index: 1;
+                opacity: 0; 
+                transform: none !important; 
+            }
+
+            .container.right-panel-active .sign-in-container {
+                opacity: 0;
+                z-index: 1;
+                visibility: hidden;
+                transform: none !important; 
+            }
+
+            .container.right-panel-active .sign-up-container {
+                opacity: 1;
+                z-index: 5; 
+                visibility: visible;
+                transform: none !important; 
+                animation: none !important; 
+            }
+
+            .overlay-container {
+                display: none; 
+            }
+            
+            .mobile-branding-logo {
+                font-size: 2.3rem; 
+                font-weight: 800;
+                color: var(--byto-primary);
+                margin-bottom: 5px; 
+                margin-top: 0; 
+                text-align: center;
+                animation: fadeInSlideUp 0.5s ease-out forwards;
+                opacity: 0;
+            }
+            .mobile-welcome-text {
+                font-size: 0.9rem; 
+                color: var(--byto-text-secondary);
+                margin-top: 0; 
+                margin-bottom: 12px; 
+                text-align: center;
+                line-height: 1.4; 
+                max-width: 90%;
+                animation: fadeInSlideUp 0.5s ease-out 0.1s forwards; 
+                opacity: 0;
+            }
+
+            .form-container h1 {
+                font-size: 1.6rem; 
+                margin-top: 5px; 
+                margin-bottom: 8px; 
+                text-shadow: 0px 1px 1px rgba(0,0,0,0.05);
+                animation: fadeInSlideUp 0.5s ease-out 0.2s forwards; 
+                opacity: 0;
+            }
+            .form-container span { 
+                 font-size: 12px; 
+                 margin-bottom: 10px; 
+                 animation: fadeInSlideUp 0.5s ease-out 0.3s forwards; 
+                 opacity: 0;
+            }
+             .social-container { 
+                margin: 12px 0; 
+                animation: fadeInSlideUp 0.5s ease-out 0.3s forwards; 
+                opacity: 0;
+            }
+            .form-container input { 
+                margin: 7px 0; 
+                animation: fadeInSlideUp 0.5s ease-out forwards; 
+                opacity: 0;
+            }
+            .form-container input:nth-of-type(1) { animation-delay: 0.4s; }
+            .form-container input:nth-of-type(2) { animation-delay: 0.5s; }
+            .form-container input:nth-of-type(3) { animation-delay: 0.6s; } 
+
+
+            .form-container a:not(.social):not(.mobile-toggle) { 
+                margin: 10px 0; 
+                font-size: 13px;
+                animation: fadeInSlideUp 0.5s ease-out 0.7s forwards;
+                opacity: 0;
+            }
+            .form-container button[type="submit"] {
+                padding: 12px 20px; 
+                font-size: 13.5px;    
+                margin-top: 10px;   
+                animation: fadeInSlideUp 0.5s ease-out 0.8s forwards;
+                opacity: 0;
+            }
+           
+            .form-container p {  
+                font-size: 13px;
+                margin: 15px 0 20px;
+                color: var(--byto-text-secondary); 
+            }
+
+            .modal-content { 
+                padding: 25px 20px; 
+                width: 95%;
+            }
+            .modal-content h2 { font-size: 1.4rem; }
+            .modal-content p { font-size: 13.5px; }
+            .modal-content input { font-size: 14px; padding: 13px 15px; }
+
+
+            .mobile-toggle {
+                display: block;
+                margin-top: 15px; 
+                font-size: 14px; 
+                font-weight: 500;
+                color: var(--byto-primary);
+                cursor: pointer;
+                text-decoration: none;
+                background: none;
+                border: none;
+                padding: 10px 8px; 
+                width: 100%;
+                text-align: center;
+                animation: fadeInSlideUp 0.5s ease-out 0.9s forwards;
+                opacity: 0;
+            }
+            .mobile-toggle:hover {
+                text-decoration: underline;
+                color: var(--byto-primary-dark);
+            }
+
+            @keyframes fadeInSlideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(15px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+        }
+
+        @media (min-width: 768px) { 
+            .mobile-branding-logo,
+            .mobile-welcome-text,
+            .mobile-toggle {
+                display: none; 
+            }
+        }
+        @media (max-width: 992px) { 
+             .lottie-animation-container {
+                 display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#" id="signUpForm">
+                <div class="mobile-branding-logo">BYTO</div>
+                <h1>Create Account</h1>
+                <p class="mobile-welcome-text">New here? Create an account to get started!</p>
+                <div class="social-container">
+                    <a href="#" class="social google" aria-label="Sign up with Google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social facebook" aria-label="Sign up with Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Full Name" required aria-label="Full Name" />
+                <input type="text" placeholder="Email or Phone" required id="signUpEmailPhone" aria-label="Email or Phone" />
+                <input type="password" placeholder="Password" required aria-label="Password" />
+                <button type="submit">Sign Up</button>
+                <a href="#" class="mobile-toggle" id="mobileSignInLink">Already have an account? Sign In</a>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form action="#" id="signInForm">
+                <div class="mobile-branding-logo">BYTO</div>
+                <h1>Sign In</h1>
+                <p class="mobile-welcome-text">Welcome back! Please sign in to continue.</p>
+                <div class="social-container">
+                    <a href="#" class="social google" aria-label="Sign in with Google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social facebook" aria-label="Sign in with Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <span>or use your account</span>
+                <input type="text" placeholder="Email or Phone" required aria-label="Email or Phone" />
+                <input type="password" placeholder="Password" required aria-label="Password"/>
+                <a href="#" id="forgotPasswordLink">Forgot your password?</a>
+                <button type="submit">Sign In</button>
+                <a href="#" class="mobile-toggle" id="mobileSignUpLink">Don't have an account? Sign Up</a>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Already have a BYTO account? Sign in here to track your shipments.</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>New to BYTO?</h1>
+                    <p>Enter your details to create an account and start tracking your shipments easily.</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lottie-animation-container">
+        <dotlottie-player src="https://lottie.host/2e629fe9-9465-4cbc-9639-221a4c7a7e26/GobphdBrqX.lottie" background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
+    </div>
+
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('forgotPasswordModal')" aria-label="Close">&times;</span>
+            <h2>Forgot Password?</h2>
+            <p>No worries! Enter your email address below and we'll send you a link to reset your password.</p>
+            <form id="forgotPasswordForm">
+                <label for="forgotEmailInput" class="sr-only">Email Address</label>
+                <input type="email" placeholder="Enter your Email" required id="forgotEmailInput"/>
+                <button type="submit">Send Reset Link</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('otpModal')" aria-label="Close">&times;</span>
+            <h2>Verify Your Account</h2>
+            <p id="otpMessage">An OTP has been sent to your registered email/phone. Please enter it below.</p>
+            <form id="otpForm">
+                <label for="otpInput" class="sr-only">Enter OTP</label>
+                <input type="text" placeholder="Enter 6-digit OTP" required id="otpInput" inputmode="numeric" pattern="\d{6}" title="OTP must be 6 digits." maxlength="6"/>
+                <button type="submit">Verify OTP</button>
+                <p style="margin-top: 15px; font-size: 12px;"><a href="#" id="resendOtpLink">Resend OTP?</a></p>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const signUpButton = document.getElementById('signUp'); 
+        const signInButton = document.getElementById('signIn'); 
+        const mainContainer = document.getElementById('container');
+
+        function applyAnimations(formContainer) {
+            if (!formContainer) {
+                // console.error("applyAnimations: formContainer is null or undefined");
+                return;
+            }
+            const elementsToAnimate = formContainer.querySelectorAll('.mobile-branding-logo, .mobile-welcome-text, h1, span, .social-container, input, a:not(.social):not(.mobile-toggle), button[type="submit"], .mobile-toggle');
+            elementsToAnimate.forEach(el => {
+                el.style.animation = 'none'; 
+                setTimeout(() => { 
+                     el.style.animation = ''; 
+                }, 20); 
+            });
+        }
+
+
+        if (signUpButton && signInButton && mainContainer) {
+            signUpButton.addEventListener('click', () => {
+                mainContainer.classList.add("right-panel-active");
+                closeAllModals();
+                if (window.innerWidth <= 767) {
+                    const signUpContainer = document.querySelector('.sign-up-container');
+                    if (signUpContainer) applyAnimations(signUpContainer);
+                }
+            });
+
+            signInButton.addEventListener('click', () => {
+                mainContainer.classList.remove("right-panel-active");
+                closeAllModals();
+                 if (window.innerWidth <= 767) {
+                    const signInContainer = document.querySelector('.sign-in-container');
+                    if (signInContainer) applyAnimations(signInContainer);
+                }
+            });
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.style.display = "flex";
+                const firstInput = modal.querySelector('input:not([type="hidden"]), button[type="submit"]');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.style.display = "none";
+            }
+        }
+        function closeAllModals() {
+            closeModal('forgotPasswordModal');
+            closeModal('otpModal');
+        }
+
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        
+        if (forgotPasswordLink && forgotPasswordModal) {
+            forgotPasswordLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal('forgotPasswordModal');
+            });
+        }
+
+        if (forgotPasswordForm) {
+            forgotPasswordForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = forgotPasswordForm.querySelector('input[type="email"]').value; 
+                console.log('Forgot password attempt for:', email);
+                setTimeout(() => {
+                    alert('If an account exists for ' + email + ', a password reset link has been sent.');
+                    closeModal('forgotPasswordModal');
+                    forgotPasswordForm.reset();
+                }, 1000);
+            });
+        }
+
+        const otpModal = document.getElementById('otpModal');
+        const otpForm = document.getElementById('otpForm');
+        const signUpForm = document.getElementById('signUpForm'); 
+        const resendOtpLink = document.getElementById('resendOtpLink');
+        const otpMessageElement = document.getElementById('otpMessage');
+
+
+        if (signUpForm) {
+            signUpForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userIdentifierInput = document.getElementById('signUpEmailPhone');
+                const userIdentifier = userIdentifierInput ? userIdentifierInput.value : "your email/phone";
+                console.log('Sign-up form submitted. Opening OTP modal for:', userIdentifier);
+                if (otpMessageElement) {
+                    otpMessageElement.textContent = `An OTP has been sent to ${userIdentifier}. Please enter it below.`;
+                }
+                openModal('otpModal');
+            });
+        }
+
+        if (otpForm) {
+            otpForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const otp = otpForm.querySelector('input[type="text"]').value; 
+                console.log('OTP submitted:', otp);
+                setTimeout(() => {
+                    if (otp === "123456") { 
+                        alert('OTP Verified! Account created successfully. You can now sign in.');
+                        closeModal('otpModal');
+                        otpForm.reset();
+                        if(mainContainer) mainContainer.classList.remove("right-panel-active");
+                        if(signUpForm) signUpForm.reset();
+                        const signInEmail = document.querySelector('.sign-in-container input[type="text"]');
+                        if(signInEmail) signInEmail.focus();
+                    } else {
+                        alert('Invalid OTP. Please try again.');
+                        const otpInputElement = otpForm.querySelector('input[type="text"]');
+                        if(otpInputElement) {
+                            otpInputElement.focus();
+                            otpInputElement.select();
+                        }
+                    }
+                }, 1000);
+            });
+        }
+
+        if(resendOtpLink) {
+            resendOtpLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Resend OTP clicked');
+                alert('A new OTP has been sent. Please check again.');
+                const otpInputElement = otpForm.querySelector('input[type="text"]');
+                if(otpInputElement) otpInputElement.focus();
+            });
+        }
+        
+        const mobileSignInLink = document.getElementById('mobileSignInLink');
+        const mobileSignUpLink = document.getElementById('mobileSignUpLink');
+
+        if (mobileSignInLink && mainContainer) {
+            mobileSignInLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mainContainer.classList.remove("right-panel-active");
+                closeAllModals(); 
+                const signInContainer = document.querySelector('.sign-in-container');
+                if (signInContainer) applyAnimations(signInContainer);
+            });
+        }
+
+        if (mobileSignUpLink && mainContainer) {
+            mobileSignUpLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mainContainer.classList.add("right-panel-active");
+                closeAllModals();
+                const signUpContainer = document.querySelector('.sign-up-container');
+                if (signUpContainer) applyAnimations(signUpContainer);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 767) {
+                const signInContainer = document.querySelector('.sign-in-container');
+                const signUpContainer = document.querySelector('.sign-up-container');
+
+                if (mainContainer && signInContainer && signUpContainer) {
+                    if (!mainContainer.classList.contains('right-panel-active')) {
+                        if (getComputedStyle(signInContainer).opacity === '1' && getComputedStyle(signInContainer).visibility === 'visible') {
+                            applyAnimations(signInContainer);
+                        }
+                    } else {
+                         if (getComputedStyle(signUpContainer).opacity === '1' && getComputedStyle(signUpContainer).visibility === 'visible') {
+                            applyAnimations(signUpContainer);
+                        }
+                    }
+                }
+            }
+        });
+
+
+        window.addEventListener('click', (event) => {
+            if (event.target === forgotPasswordModal) {
+                closeModal('forgotPasswordModal');
+            }
+            if (event.target === otpModal) {
+                closeModal('otpModal');
+            }
+        });
+
+        window.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                if (forgotPasswordModal.style.display === 'flex') {
+                    closeModal('forgotPasswordModal');
+                }
+                if (otpModal.style.display === 'flex') {
+                    closeModal('otpModal');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

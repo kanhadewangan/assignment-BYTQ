@@ -1,10 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
-import Auth from './pages/Auth/AuthPages'
-
+import AuthPages from './pages/Auth/AuthPages';
 function App() {
   return (
     <BrowserRouter>
-      <Auth />
+      <AuthPages/>
     </BrowserRouter>
   )
 }
