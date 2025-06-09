@@ -1,4 +1,4 @@
-# BYTO - Authentication System
+#   Authentication System
 
 A modern, responsive authentication system built with React, featuring beautiful UI animations and a seamless user experience.
 
